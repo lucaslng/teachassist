@@ -6,7 +6,6 @@ import 'package:teachassist/scraper.dart';
 import 'package:teachassist/tools/round.dart';
 
 class OverviewPage extends StatelessWidget {
-
   double _calculateCourseAverage(List<Course> data) {
     int courseCount = 0;
     double courseTotal = 0;
@@ -32,51 +31,100 @@ class OverviewPage extends StatelessWidget {
       children: [
         const SizedBox(height: 10),
         Container(
-          height: 300,
-          width: 300,
-          child: RadialGauge(value: _calculateCourseAverage(data))
-        ),
+            height: 300,
+            width: 300,
+            child: RadialGauge(
+              value: _calculateCourseAverage(data),
+              isAverage: true,
+            )),
         for (var course in data)
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-            child: Card(
-              elevation: 3,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
+            child: CourseWidget(course: course),
+          )
+      ],
+    );
+  }
+}
+
+class CourseWidget extends StatelessWidget {
+  const CourseWidget({
+    super.key,
+    required this.course,
+  });
+
+  final Course course;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Card(
+        elevation: 3,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Builder(builder: (context) {
+            if (course.code.contains("LUNCH")) {
+              return Column(children: [
+                Text(
+                  "LUNCH",
+                  style: theme.textTheme.headlineSmall,
+                ),
+                Text(
+                  "Period ${course.period}",
+                  style: theme.textTheme.bodyLarge,
+                ),
+              ]);
+            } else {
+              return Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("${course.name} - ${course.room}"),
-                          Text(course.code),
-                          Text(course.period),
+                          Text(
+                            "${course.code} - ${course.room}",
+                            style: theme.textTheme.headlineSmall,
+                          ),
+                          if (course.name != "")
+                            Text(
+                              course.name,
+                              style: theme.textTheme.bodyLarge,
+                            ),
+                          Text(
+                            "Period ${course.period}",
+                            style: theme.textTheme.bodyLarge,
+                          ),
                         ],
                       ),
                     ),
-                    Container(
-                      height: 180,
-                      width: 180,
-                      alignment: Alignment.centerRight,
-                      child: Builder(
-                        builder: (context) {
-                          if (course.mark == -1) {
-                            return const Text("Please see teacher for current status regarding achievement in the course");
-                          } else {
-                            return RadialGauge(value: course.mark);
-                          }
-                        }
-                      ),
-                    ),
-                  ]
-                ),
-              )
-            ),
-          )
-      ],
-    );
+                    Builder(builder: (context) {
+                      if (course.mark == -1) {
+                        return Row(
+                          children: [
+                            const SizedBox(width: 4),
+                            Container(
+                              alignment: Alignment.centerRight,
+                              height: 170,
+                              width: 150,
+                              child: Text(
+                                "Please see teacher for current status regarding achievement in the course",
+                                style: theme.textTheme.bodyMedium,
+                              ),
+                            ),
+                          ],
+                        );
+                      } else {
+                        return Container(
+                            alignment: Alignment.centerRight,
+                            height: 170,
+                            width: 170,
+                            child: RadialGauge(value: course.mark));
+                      }
+                    }),
+                  ]);
+            }
+          }),
+        ));
   }
-  
 }

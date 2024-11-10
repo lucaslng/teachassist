@@ -5,9 +5,11 @@ class RadialGauge extends StatelessWidget {
   const RadialGauge({
     super.key,
     required this.value,
+    this.isAverage = false,
   });
   
   final double value;
+  final bool isAverage;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +44,7 @@ class RadialGauge extends StatelessWidget {
               angle: 90,
               widget: Text(
                 value.toString(),
+                style: isAverage ? theme.textTheme.displayLarge : theme.textTheme.displayMedium,
               )
             )
           ]
