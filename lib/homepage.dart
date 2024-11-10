@@ -53,12 +53,10 @@ class _HomePageState extends State<HomePage> {
         if (snapshot.hasData) {
           appState.data = snapshot.data;
           children = Scaffold(
-            body: Expanded(
-                child: Container(child: page),
-            ),
+            body: page,
             bottomNavigationBar: NavigationBar(
               elevation: 3,
-              backgroundColor: Color.alphaBlend(theme.colorScheme.surfaceContainer, theme.colorScheme.surfaceContainerLow),
+              // backgroundColor: ,
               destinations: const [
                 NavigationDestination(
                   label: "Home",
