@@ -110,8 +110,8 @@ class Scraper {
       String url = "https://ta.yrdsb.ca/live/students/";
       if (markElement != null) {
         hasMark = true;
-        // markString = markElement.innerHtml!.trim().replaceAll(RegExp('(current mark = )|%'), "").trim();
-        markString = "Level 4-";
+        markString = markElement.innerHtml!.trim().replaceAll(RegExp('(current mark = )|%'), "").trim();
+        // markString = "Level 4-";
         url += markElement.attributes['href']!;
       }
 

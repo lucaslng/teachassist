@@ -46,70 +46,72 @@ class _HomePageState extends State<HomePage> {
         throw UnimplementedError("No widget for selected index: $_selectedIndex");
     }
     
-    return FutureBuilder(
-      future: data,
-      builder: (context, snapshot) {
-        Widget children;
-    
-        if (snapshot.hasData) {
-          appState.data = snapshot.data;
-          children = Scaffold(
-            body: page,
-            bottomNavigationBar: NavigationBar(
-              elevation: 3,
-              // backgroundColor: ,
-              destinations: const [
-                NavigationDestination(
-                  label: "Home",
-                  icon: Icon(Icons.home),
-                ),
-                NavigationDestination(
-                  label: "Settings",
-                  icon: Icon(Icons.settings),
-                ),
-              ],
-              selectedIndex: _selectedIndex,
-              onDestinationSelected: (value) {
-                setState(() {
-                  _selectedIndex =  value;
-                });
-              },
-            )
+    return SafeArea(
+      child: FutureBuilder(
+        future: data,
+        builder: (context, snapshot) {
+          Widget children;
+      
+          if (snapshot.hasData) {
+            appState.data = snapshot.data;
+            children = Scaffold(
+              body: page,
+              bottomNavigationBar: NavigationBar(
+                elevation: 3,
+                // backgroundColor: ,
+                destinations: const [
+                  NavigationDestination(
+                    label: "Home",
+                    icon: Icon(Icons.home),
+                  ),
+                  NavigationDestination(
+                    label: "Settings",
+                    icon: Icon(Icons.settings),
+                  ),
+                ],
+                selectedIndex: _selectedIndex,
+                onDestinationSelected: (value) {
+                  setState(() {
+                    _selectedIndex =  value;
+                  });
+                },
+              )
+            );
+          } else if (snapshot.hasError) {
+            children = Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.error_outline,
+                    color: theme.colorScheme.error,
+                    size: 60,
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    "Error: ${snapshot.error}",
+                    style: theme.textTheme.labelLarge,
+                  ),
+                  const SizedBox(height: 8),
+                  ElevatedButton.icon(
+                    icon: const Icon(Icons.logout),
+                    label: const Text("Logout"),
+                    style: const ButtonStyle(elevation: WidgetStatePropertyAll(3)),
+                    onPressed: () {
+                      appState.logOutF();
+                    }
+                  )
+                ],
+              )
+            );
+          } else {
+            children = const LoadingScreen();
+          }
+          return Scaffold(
+            body: children,
           );
-        } else if (snapshot.hasError) {
-          children = Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.error_outline,
-                  color: theme.colorScheme.error,
-                  size: 60,
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  "Error: ${snapshot.error}",
-                  style: theme.textTheme.labelLarge,
-                ),
-                const SizedBox(height: 8),
-                ElevatedButton.icon(
-                  icon: const Icon(Icons.logout),
-                  label: const Text("Logout"),
-                  style: const ButtonStyle(elevation: WidgetStatePropertyAll(3)),
-                  onPressed: () {
-                    appState.logOutF();
-                  }
-                )
-              ],
-            )
-          );
-        } else {
-          children = const LoadingScreen();
         }
-        return Scaffold(
-          body: children,
-        );
-      }
+      ),
     );
   }
 }
