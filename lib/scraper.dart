@@ -33,6 +33,7 @@ class Scraper {
       Uri location = Uri.parse(response.headers.value(HttpHeaders.locationHeader)!);
 
       if (location == Uri.parse("https://ta.yrdsb.ca/live/index.php?error_message=3")) {
+        
         return Future.error("Invalid login");
       } else {
         // debug("\nredirecting to $location \n");
@@ -55,14 +56,63 @@ class Scraper {
     HttpClientResponse response = await _makeRequest(uri);
     if (response.statusCode == 200) {
       final Future<String> responseBody = response.transform(utf8.decoder).join();
-      
-      return _parseData(await responseBody);
+      List<Course> courses = _parseHomeData(await responseBody);
+      for (var course in courses) {
+        if (course.url != Uri.parse("https://ta.yrdsb.ca/live/students/") && !course.url.toString().contains("viewReportOE")) {
+          HttpClientResponse courseResponse = await _makeRequest(course.url);
+          debug("requesting ${course.name} ${course.url}");
+            if (courseResponse.statusCode == 200) {
+              debug("requesting ${course.name} ${course.url} success");
+              final Future<String> courseResponseBody = courseResponse.transform(utf8.decoder).join();
+              final List<Assignment> assignments = _parseCourseData(await courseResponseBody);
+              course.assignments = assignments;
+            }
+        }
+      }
+      return courses;
     } else {
       return Future.error(Exception("error: ${response.statusCode}"));
     }
   }
 
-  List<Course> _parseData(String data) {
+
+  
+  List<Assignment> _parseCourseData(String data) {
+    final List<Assignment> assignments = [];
+
+    final HtmlDocument doc = parseHtmlDocument(data);
+
+    final List<Element> assignmentsElement = doc.querySelector('body > div > div:nth-child(3) > div > div > table:nth-child(1) > tbody')!.children.toList(); // 
+	  final int categories = assignmentsElement[0].children.length;
+    assignmentsElement.removeRange(0, 1);
+    for (var i = 0; i < assignmentsElement.length; i += 2) {
+		  List<Element> assignmentElement = assignmentsElement[i].children;
+      final String name = assignmentElement[0].innerText.trim();
+      debug(name);
+      final String feedback = assignmentsElement[i+1].children[0].innerText.replaceAll("\n\n", "\n").trim();
+
+      final Assignment assignment = Assignment(name: name, feedback: feedback);
+
+      
+
+      for (int j = 1; j < categories; j++) {
+        final Element? element = assignmentElement[j].querySelector('table > tbody > tr > td');
+        final double mark = double.parse(element?.innerText.split("\n")[0].trim().split(RegExp(' (/|=) '))[0] ?? "-1");
+        final int total = int.parse(element?.innerText.split("\n")[0].trim().split(RegExp(' (/|=) '))[1] ?? "-1");
+        final int percent = int.parse(element?.innerText.split("\n")[0].trim().split(RegExp(' (/|=) '))[2].replaceFirst("%", "") ?? "-1");
+        debug(percent);
+        final double weight = double.parse(element?.innerText.split("\n")[1].trim().replaceAll("weight=", "").replaceAll("no weight", "-1") ?? "-1");
+        final Mark markClass = Mark(mark: mark, total: total, percent: percent, weight: weight);
+        // debug(markClass.toString());
+        assignment.marks.add(markClass);
+      }
+      assignments.add(assignment);
+    }
+
+    return assignments;
+  }
+
+  List<Course> _parseHomeData(String data) {
     List<Course> courses = [];
 
     final HtmlDocument doc = parseHtmlDocument(data);
@@ -141,4 +191,6 @@ class Scraper {
     }
   return courses;
   }
+
+
 }

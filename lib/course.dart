@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Course {
   String code = "";
   String name = "";
@@ -12,6 +14,8 @@ class Course {
   String markString = "-1";
   Uri url = Uri();
   Course(this.code, this.name, this.period, this.room, this.startDate, this.endDate, this.hasFinal, this.hasMidterm, this.finalOrMidtermMark, this.hasMark, this.markString, this.url);
+
+  List<Assignment> assignments = [];
 
   double getMark() {
     if (!isLevel()) {
@@ -49,4 +53,29 @@ class Course {
     }
   }
 
+  Widget page() {
+    return ListView(
+      children: [
+        Text(name),
+        for (var assignment in assignments)
+          Text(assignment.name)
+      ],
+    );
+  }
+
+}
+
+class Assignment {
+  final String name;
+  final List<Mark> marks = [];
+  final String feedback;
+  Assignment({required this.name, required this.feedback});
+}
+
+class Mark {
+  final double mark;
+  final int total;
+  final int percent;
+  final double weight;
+  const Mark({required this.mark, required this.total, required this.percent, required this.weight});
 }

@@ -55,8 +55,7 @@ class _LoginPageState extends State<LoginPage> {
     var appState = context.watch<MyAppState>();
     final theme = Theme.of(context);
 
-    Widget loginForm;
-    loginForm = Scaffold(
+    Widget loginForm = Scaffold(
         body: Form(
           key: _formKey,
           autovalidateMode: AutovalidateMode.always,
