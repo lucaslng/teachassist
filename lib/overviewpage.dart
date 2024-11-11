@@ -4,6 +4,7 @@ import 'package:teachassist/course.dart';
 import 'package:teachassist/coursewidget.dart';
 import 'package:teachassist/main.dart';
 import 'package:teachassist/radialgauge.dart';
+import 'package:teachassist/tools/debug.dart';
 import 'package:teachassist/tools/round.dart';
 
 class OverviewPage extends StatelessWidget {
@@ -11,13 +12,19 @@ class OverviewPage extends StatelessWidget {
     int courseCount = 0;
     double courseTotal = 0;
     for (var course in data) {
-      if (course.mark != -1) {
+      if (course.hasMark && !course.isLevel()) {
         courseCount++;
-        courseTotal += course.mark;
+        courseTotal += course.getMark();
       }
     }
-    double courseAverage = (courseTotal / courseCount);
-    return round(courseAverage, 1);
+    if (courseCount > 0) {
+      double courseAverage = (courseTotal / courseCount);
+    // debug("$courseAverage - $courseTotal - $courseCount");
+      return round(courseAverage, 1);
+    } else {
+      return -1;
+    }
+    
   }
 
   @override

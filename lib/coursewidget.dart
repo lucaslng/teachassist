@@ -54,36 +54,85 @@ class CourseWidget extends StatelessWidget {
                       ),
                     ),
                     Builder(builder: (context) {
-                      if (course.mark == -1) {
-                        if (course.status() != "upcoming") {
-                          return Row(
-                            children: [
-                              const SizedBox(width: 4),
-                              Container(
-                                alignment: Alignment.centerRight,
-                                height: 170,
-                                width: 150,
-                                child: Text(
-                                  "Please see teacher for current status regarding achievement in the course",
-                                  style: theme.textTheme.bodyMedium,
-                                ),
-                              ),
-                            ],
-                          );
-                        } else {
-                          return const SizedBox(width: 0);
-                        }
+                      if (course.status() == "upcoming") {
+                        return const SizedBox(width: 0);
+                      } else if (!course.hasMark) {
+                        return const SeeTeacherMessage();
+                      } else if (course.isLevel()) {
+                        return CourseLevelMessage(course: course);
                       } else {
-                        return Container(
-                            alignment: Alignment.centerRight,
-                            height: 170,
-                            width: 170,
-                            child: RadialGauge(value: course.mark));
+                        return CourseMarkRadialGauge(course: course);
                       }
                     }),
                   ]);
             }
           }),
         ));
+  }
+}
+
+class CourseMarkRadialGauge extends StatelessWidget {
+  const CourseMarkRadialGauge({
+    super.key,
+    required this.course,
+  });
+
+  final Course course;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        alignment: Alignment.centerRight,
+        height: 170,
+        width: 170,
+        child: RadialGauge(value: course.getMark()));
+  }
+}
+
+class CourseLevelMessage extends StatelessWidget {
+  const CourseLevelMessage({
+    super.key,
+    required this.course,
+  });
+
+  final Course course;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Row(
+      children: [
+        const SizedBox(width: 4),
+        Text(
+          course.markString,
+          style: theme.textTheme.headlineMedium,
+        )
+      ],
+    );
+  }
+}
+
+class SeeTeacherMessage extends StatelessWidget {
+  const SeeTeacherMessage({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Row(
+      children: [
+        const SizedBox(width: 4),
+        Container(
+          alignment: Alignment.centerRight,
+          height: 170,
+          width: 150,
+          child: Text(
+            "Please see teacher for current status regarding achievement in the course",
+            style: theme.textTheme.bodyMedium,
+          ),
+        ),
+      ],
+    );
   }
 }

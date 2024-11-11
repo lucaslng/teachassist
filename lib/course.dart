@@ -9,12 +9,28 @@ class Course {
   bool hasMidterm = false;
   int finalOrMidtermMark = 0;
   bool hasMark = false;
-  double mark = 0;
+  String markString = "-1";
   Uri url = Uri();
-  Course(this.code, this.name, this.period, this.room, this.startDate, this.endDate, this.hasFinal, this.hasMidterm, this.finalOrMidtermMark, this.hasMark, this.mark, this.url);
+  Course(this.code, this.name, this.period, this.room, this.startDate, this.endDate, this.hasFinal, this.hasMidterm, this.finalOrMidtermMark, this.hasMark, this.markString, this.url);
+
+  double getMark() {
+    if (!isLevel()) {
+      return double.parse(markString);
+    } else {
+      return -1;
+    }
+  }
 
   bool isFailing() {
-    if (mark < 50) {
+    if (getMark() < 50) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  bool isLevel() {
+    if (markString.contains(RegExp("[^0-9.]"))) {
       return true;
     } else {
       return false;

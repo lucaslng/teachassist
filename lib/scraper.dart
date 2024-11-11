@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:teachassist/course.dart';
+import 'package:teachassist/tools/debug.dart';
 // import 'package:teachassist/tools/debug.dart';
 import 'package:universal_html/html.dart';
 import 'package:universal_html/parsing.dart';
@@ -104,12 +105,13 @@ class Scraper {
       }
 
       var markElement = courseElement.querySelector('td:nth-child(3) > a');
-      String mark = "-1";
+      String markString = "-1";
       bool hasMark = false;
       String url = "https://ta.yrdsb.ca/live/students/";
       if (markElement != null) {
         hasMark = true;
-        mark = markElement.innerHtml!.trim().replaceAll(RegExp('(current mark = )|%'), "");
+        markString = markElement.innerHtml!.trim().replaceAll(RegExp('(current mark = )|%'), "").trim();
+        // markString = "Level 4-";
         url += markElement.attributes['href']!;
       }
 
@@ -134,7 +136,7 @@ class Scraper {
 
       // debug("-----");
       
-      final Course course = Course(code, name, period, room, startDate, endDate, hasFinal, hasMidterm, int.parse(finalOrMidtermMark), hasMark, double.parse(mark), Uri.parse(url));
+      final Course course = Course(code, name, period, room, startDate, endDate, hasFinal, hasMidterm, int.parse(finalOrMidtermMark), hasMark, markString, Uri.parse(url));
       courses.add(course);
     }
   return courses;
