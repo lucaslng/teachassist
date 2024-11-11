@@ -7,7 +7,7 @@ class RadialGauge extends StatelessWidget {
     required this.value,
     this.isAverage = false,
   });
-  
+
   final double value;
   final bool isAverage;
 
@@ -20,34 +20,36 @@ class RadialGauge extends StatelessWidget {
       axes: <RadialAxis>[
         RadialAxis(
           minimum: 0,
-          maximum: 100,
-          showLabels: false,
-          showTicks: false,
-          pointers: [
-            RangePointer(
-              value: value,
+            maximum: 100,
+            showLabels: false,
+            showTicks: false,
+            pointers: [
+              RangePointer(
+                value: value,
+                cornerStyle: CornerStyle.bothCurve,
+                color: theme.colorScheme.primary,
+                width: 0.2,
+                sizeUnit: GaugeSizeUnit.factor,
+              ),
+            ],
+            axisLineStyle: AxisLineStyle(
+              thickness: 0.2,
               cornerStyle: CornerStyle.bothCurve,
-              color: theme.colorScheme.primary,
-              width: 0.2,
-              sizeUnit: GaugeSizeUnit.factor,
+              color: theme.colorScheme.surfaceContainerHigh,
+              thicknessUnit: GaugeSizeUnit.factor,
             ),
-          ],
-          axisLineStyle: AxisLineStyle(
-            thickness: 0.2,
-            cornerStyle: CornerStyle.bothCurve,
-            color: theme.colorScheme.surfaceContainerHigh,
-            thicknessUnit: GaugeSizeUnit.factor,
-          ),
-          annotations: <GaugeAnnotation>[
-            GaugeAnnotation(
-              positionFactor: 0.1,
-              angle: 90,
-              widget: Text(
-                value.toString(),
-                style: isAverage ? theme.textTheme.displayLarge : theme.textTheme.displayMedium,
+            annotations: <GaugeAnnotation>[
+              GaugeAnnotation(
+                positionFactor: 0.1,
+                angle: 90,
+                widget: Text(
+                  value.toString(),
+                  style: isAverage
+                      ? theme.textTheme.displayLarge
+                      : theme.textTheme.displayMedium,
+                )
               )
-            )
-          ]
+            ]
         )
       ],
     );

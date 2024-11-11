@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 // import 'dart:io';
 import 'package:teachassist/loginpage.dart';
 import 'package:teachassist/scraper.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 void main() async {
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: colorScheme,
-
+          fontFamily: GoogleFonts.overpass().fontFamily,
         ),
         home: const LoginPage(),
       ),

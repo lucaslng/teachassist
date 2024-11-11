@@ -61,7 +61,7 @@ class CourseWidget extends StatelessWidget {
     return Card(
         elevation: 3,
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(12.0),
           child: Builder(builder: (context) {
             if (course.code.contains("LUNCH")) {
               return Column(children: [
