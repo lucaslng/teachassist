@@ -66,7 +66,7 @@ class CourseInfoWidget extends StatelessWidget {
               ],
             ),
           ),
-          Builder(builder: (context) {
+          LayoutBuilder(builder: (context, constraints) {
             if (course.status() == "upcoming") {
               return const SizedBox(width: 0);
             } else if (!course.hasMark) {
@@ -135,12 +135,14 @@ class CourseLevelMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const SizedBox(width: 4),
-        Text(
-          course.markString,
-          style: theme.textTheme.headlineMedium,
+        Container(
+          alignment: Alignment.centerRight,
+          child: Text(
+            course.markString,
+            style: theme.textTheme.headlineMedium,
+          ),
         )
       ],
     );
@@ -160,7 +162,7 @@ class SeeTeacherMessage extends StatelessWidget {
         const SizedBox(width: 4),
         Container(
           alignment: Alignment.centerRight,
-          height: 170,
+          // height: 170,
           width: 150,
           child: Text(
             "Please see teacher for current status regarding achievement in the course",

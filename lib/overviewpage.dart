@@ -37,16 +37,27 @@ class OverviewPage extends StatelessWidget {
       data = appState.data!;
     }
 
+    double courseAverage = _calculateCourseAverage(data);
+
     return ListView(
       children: [
         const SizedBox(height: 10),
-        Container(
-            height: 300,
-            width: 300,
-            child: RadialGauge(
-              value: _calculateCourseAverage(data),
-              isAverage: true,
-            )),
+        Builder(
+          builder: (context) {
+            if (courseAverage != -1) {
+              return Container(
+                height: 300,
+                width: 300,
+                child: RadialGauge(
+                  value: courseAverage,
+                  isAverage: true,
+                )
+              );
+            } else {
+              return const SizedBox(height: 0);
+            }
+          }
+        ),
         for (var course in data)
           if (course.status() == "ongoing")
             Padding(
