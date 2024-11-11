@@ -128,7 +128,6 @@ class _LoginPageState extends State<LoginPage> {
                 ElevatedButton.icon(
                   label: const Text("Login"),
                   icon: const Icon(Icons.login),
-                  style: const ButtonStyle(elevation: WidgetStatePropertyAll(3)),
                   onPressed:() {
                     if (_formKey.currentState!.validate()) {
                       debug("username: ${_idController.text}");

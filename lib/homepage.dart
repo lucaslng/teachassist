@@ -96,7 +96,6 @@ class _HomePageState extends State<HomePage> {
                   ElevatedButton.icon(
                     icon: const Icon(Icons.logout),
                     label: const Text("Logout"),
-                    style: const ButtonStyle(elevation: WidgetStatePropertyAll(3)),
                     onPressed: () {
                       appState.logOutF();
                     }

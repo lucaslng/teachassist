@@ -21,9 +21,6 @@ class SettingsPage extends StatelessWidget {
             onPressed:() {
               appState.logOutF();
             },
-            style: const ButtonStyle(
-              elevation: WidgetStatePropertyAll(3),
-            ),
           )
         ]
       ),

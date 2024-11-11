@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           colorScheme: colorScheme,
           fontFamily: GoogleFonts.overpass().fontFamily,
+          elevatedButtonTheme: const ElevatedButtonThemeData(style: ButtonStyle(elevation: WidgetStatePropertyAll(3))),
         ),
         home: const LoginPage(),
       ),
