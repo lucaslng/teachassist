@@ -133,12 +133,13 @@ class _LoginPageState extends State<LoginPage> {
                     if (_formKey.currentState!.validate()) {
                       debug("username: ${_idController.text}");
                       debug("password: ${_passwordController.text}");
-                      _setCredentials(_id, _password);
+                      
                       appState.logInF();
                       setState(() {
                         _id = _idController.text;
                         _password = _passwordController.text;
                       });
+                      _setCredentials(_id, _password);
                     }
                   },
                 )
