@@ -101,6 +101,7 @@ class CourseLevelMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const SizedBox(width: 4),
         Text(
