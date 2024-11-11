@@ -1,0 +1,32 @@
+name: Build Android App
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    name: Build android app
+    runs-on: macos-14
+
+    steps:
+      - name: Setup Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          flutter-version-file: ./pubsec.yaml
+          cache: true
+
+      - name: Get Packages
+        run: flutter pub get
+
+      - name: Build Android App Bundle
+        run: |
+          flutter build apk --release
+
+      - name: Publish Android Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-apk
+          path: build/app/outputs/flutter-apk/*.apk
