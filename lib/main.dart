@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:teachassist/course.dart';
 // import 'package:syncfusion_flutter_charts/charts.dart';
 // import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 // import 'dart:io';
 import 'package:teachassist/loginpage.dart';
-import 'package:teachassist/scraper.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 

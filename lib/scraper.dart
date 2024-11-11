@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:cookie_jar/cookie_jar.dart';
+import 'package:teachassist/course.dart';
 // import 'package:teachassist/tools/debug.dart';
 import 'package:universal_html/html.dart';
 import 'package:universal_html/parsing.dart';
@@ -138,29 +139,4 @@ class Scraper {
     }
   return courses;
   }
-}
-
-class Course {
-  String code = "";
-  String name = "";
-  String period = "";
-  String room = "";
-  DateTime startDate = DateTime(0);
-  DateTime endDate = DateTime(0);
-  bool hasFinal = false;
-  bool hasMidterm = false;
-  int finalOrMidtermMark = 0;
-  bool hasMark = false;
-  double mark = 0;
-  Uri url = Uri();
-  Course(this.code, this.name, this.period, this.room, this.startDate, this.endDate, this.hasFinal, this.hasMidterm, this.finalOrMidtermMark, this.hasMark, this.mark, this.url);
-
-  bool isFailing() {
-    if (mark < 50) {
-      return true;
-    } else {
-      return false;
-    }
-  }  
-
 }
