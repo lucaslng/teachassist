@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Build android app
-    runs-on: macos-14
+    runs-on: ubuntu-latest
 
     steps:
       - name: Clone repositor
