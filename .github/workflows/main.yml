@@ -15,7 +15,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          flutter-version-file: pubsec.yaml
+          flutter-version-file: pubspec.yaml
           cache: true
 
       - name: Get Packages
