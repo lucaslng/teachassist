@@ -19,14 +19,17 @@ jobs:
         with:
           channel: 'stable'
           flutter-version-file: pubspec.yaml
+          achitecture: x64
           cache: true
+      - run: |
+          git config --global --add safe.directory /opt/hostedtoolcache/flutter/${{ steps.flutter-action.outputs.CHANNEL }}-${{ steps.flutter-action.outputs.VERSION }}-${{ steps.flutter-action.outputs.ARCHITECTURE }}
+          flutter --version
 
       - name: Get Packages
         run: flutter pub get
 
       - name: Build Android App Bundle
         run: |
-          git config --global --add safe.directory /opt/hostedtoolcache/flutter/${{ steps.flutter-action.outputs.CHANNEL }}-${{ steps.flutter-action.outputs.VERSION }}-${{ steps.flutter-action.outputs.ARCHITECTURE }}
           flutter build apk --release
 
       - name: Publish Android Artifact
