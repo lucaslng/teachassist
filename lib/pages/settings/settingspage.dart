@@ -9,16 +9,26 @@ class SettingsPage extends StatelessWidget {
       child: ListView(
         
         children: [
-          const SizedBox(height: 10),
-          Text("Settings", style: theme.textTheme.headlineLarge),
-          const SizedBox(height: 10),
-          ElevatedButton.icon(
-            label: const Text("Logout"),
-            icon: const Icon(Icons.logout),
-            onPressed:() {
-              Navigator.popUntil(context, ModalRoute.withName("/"));
-            },
-          )
+          Column(
+            children: [
+              const SizedBox(height: 10),
+              Text("Settings", style: theme.textTheme.headlineLarge),
+              const SizedBox(height: 10),
+              const ListTile(
+                leading: Icon(Icons.palette),
+                title: Text("Appearance"),
+                trailing: Icon(Icons.arrow_forward_rounded),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton.icon(
+                label: const Text("Logout"),
+                icon: const Icon(Icons.logout),
+                onPressed:() {
+                  Navigator.popUntil(context, ModalRoute.withName("/"));
+                },
+              )
+            ],
+          ),
         ]
       ),
     );
