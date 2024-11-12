@@ -42,6 +42,7 @@ dependencies:
   universal_html: ^2.2.4
   google_fonts: ^6.2.1
   provider: ^6.1.2
+  circle_chart: ^1.0.0
 
 dev_dependencies:
   flutter_test:
