@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:teachassist/utils/coursedata/assignment.dart';
 
 class Course {
   String code = "";
@@ -53,19 +53,4 @@ class Course {
     }
   }
 
-}
-
-class Assignment {
-  final String name;
-  final List<Mark> marks = [];
-  final String feedback;
-  Assignment({required this.name, required this.feedback});
-}
-
-class Mark {
-  final double mark;
-  final int total;
-  final int percent;
-  final double weight;
-  const Mark({required this.mark, required this.total, required this.percent, required this.weight});
 }

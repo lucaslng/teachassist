@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:provider/provider.dart';
-import 'package:teachassist/homepage.dart';
-import 'package:teachassist/main.dart';
-import 'package:teachassist/tools/debug.dart';
+import 'package:teachassist/pages/homepage.dart';
+import 'package:teachassist/utils/debug.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -63,7 +61,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
     final theme = Theme.of(context);
 
     Widget loginForm = Scaffold(

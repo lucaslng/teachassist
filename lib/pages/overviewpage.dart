@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:teachassist/course.dart';
-import 'package:teachassist/coursewidget.dart';
 import 'package:teachassist/main.dart';
-import 'package:teachassist/radialgauge.dart';
-import 'package:teachassist/tools/debug.dart';
-import 'package:teachassist/tools/round.dart';
+import 'package:teachassist/utils/coursedata/course.dart';
+import 'package:teachassist/utils/round.dart';
+import 'package:teachassist/widgets/coursewidget/coursewidget.dart';
+import 'package:teachassist/widgets/radialwidget.dart';
 
 class OverviewPage extends StatelessWidget {
   double _calculateCourseAverage(List<Course> data) {

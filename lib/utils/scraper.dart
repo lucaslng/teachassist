@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:cookie_jar/cookie_jar.dart';
-import 'package:teachassist/course.dart';
-import 'package:teachassist/tools/debug.dart';
-// import 'package:teachassist/tools/debug.dart';
+import 'package:teachassist/utils/coursedata/assignment.dart';
+import 'package:teachassist/utils/coursedata/course.dart';
+import 'package:teachassist/utils/coursedata/mark.dart';
+import 'package:teachassist/utils/debug.dart';
 import 'package:universal_html/html.dart';
 import 'package:universal_html/parsing.dart';
 

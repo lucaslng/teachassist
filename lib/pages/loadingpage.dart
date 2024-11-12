@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class LoadingScreen extends StatelessWidget {
-  const LoadingScreen({
+class LoadingPage extends StatelessWidget {
+  const LoadingPage({
     super.key,
   });
 

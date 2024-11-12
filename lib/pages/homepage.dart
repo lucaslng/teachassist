@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:teachassist/course.dart';
-import 'package:teachassist/errorpage.dart';
-import 'package:teachassist/loadingscreen.dart';
 import 'package:teachassist/main.dart';
-import 'package:teachassist/overviewpage.dart';
-import 'package:teachassist/scraper.dart';
-import 'package:teachassist/settingspage.dart';
-import 'package:teachassist/tools/debug.dart';
+import 'package:teachassist/pages/errorpage.dart';
+import 'package:teachassist/pages/loadingpage.dart';
+import 'package:teachassist/pages/overviewpage.dart';
+import 'package:teachassist/pages/settings/settingspage.dart';
+import 'package:teachassist/utils/coursedata/course.dart';
+import 'package:teachassist/utils/scraper.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.id, required this.password});
@@ -34,7 +33,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
-    final theme = Theme.of(context);
 
     Widget page;
     switch (_selectedIndex) {
@@ -82,7 +80,7 @@ class _HomePageState extends State<HomePage> {
           } else if (snapshot.hasError) {
             children = ErrorPage(snapshot: snapshot);
           } else {
-            children = const LoadingScreen();
+            children = const LoadingPage();
           }
           return Scaffold(
             body: children,
