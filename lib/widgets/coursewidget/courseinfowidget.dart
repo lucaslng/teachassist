@@ -22,18 +22,22 @@ class CourseInfoWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "${course.code} - ${course.room}",
-                  style: theme.textTheme.headlineSmall,
-                ),
-                if (course.name != "")
-                  Text(
-                    course.name,
-                    style: theme.textTheme.bodyLarge,
-                  ),
-                Text(
-                  "Period ${course.period}",
-                  style: theme.textTheme.bodyLarge,
+                Column(
+                  children: [
+                    Text(
+                      "${course.code} - ${course.room}",
+                      style: theme.textTheme.headlineSmall,
+                    ),
+                    if (course.name != "")
+                      Text(
+                        course.name,
+                        style: theme.textTheme.bodyLarge,
+                      ),
+                    Text(
+                      "Period ${course.period}",
+                      style: theme.textTheme.bodyLarge,
+                    ),
+                  ],
                 ),
                 if (course.hasFinal || course.hasMidterm)
                   Text(

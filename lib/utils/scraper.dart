@@ -92,8 +92,14 @@ class Scraper {
 
     final HtmlDocument doc = parseHtmlDocument(data);
 
-    final List<Element> assignmentsElement = doc.querySelector('body > div > div:nth-child(3) > div > div > table:nth-child(1) > tbody')!.children.toList(); // 
-	  final int categories = assignmentsElement[0].children.length;
+    final List<Element> assignmentsElement;
+    if (doc.querySelector('body > div > div:nth-child(3) > h3')!.innerText.contains("Learning Skills")) {
+      assignmentsElement = doc.querySelector('body > div > div:nth-child(5) > div > div > table:nth-child(1) > tbody')!.children.toList();
+    } else {
+      assignmentsElement = doc.querySelector('body > div > div:nth-child(3) > div > div > table:nth-child(1) > tbody')!.children.toList(); // 
+    }
+
+    final int categories = assignmentsElement[0].children.length;
     assignmentsElement.removeRange(0, 1);
     for (var i = 0; i < assignmentsElement.length; i += 2) {
 		  List<Element> assignmentElement = assignmentsElement[i].children;
