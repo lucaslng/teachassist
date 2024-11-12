@@ -43,7 +43,7 @@ class Appearance extends StatelessWidget {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Appearance"),
+        title: const Text("Appearance"),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
