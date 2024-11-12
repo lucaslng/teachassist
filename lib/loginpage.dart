@@ -21,6 +21,17 @@ class _LoginPageState extends State<LoginPage> {
   var _id = "";
   var _password = "";
 
+  Future<void> login(String id, String password) async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return HomePage(id: id, password: password);
+        }
+      )
+    );
+  }
+
   Future<void> _loadCredentials() async {
     final id = await _storage.read(key: "id");
     final password = await _storage.read(key: "password");
@@ -64,6 +75,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // Text("$_id\n$_password"),
                 Card(
                   elevation: 3,
                   child: Padding(
@@ -131,13 +143,8 @@ class _LoginPageState extends State<LoginPage> {
                     if (_formKey.currentState!.validate()) {
                       debug("username: ${_idController.text}");
                       debug("password: ${_passwordController.text}");
-                      
-                      appState.logInF();
-                      setState(() {
-                        _id = _idController.text;
-                        _password = _passwordController.text;
-                      });
-                      _setCredentials(_id, _password);
+                      _setCredentials(_idController.text, _passwordController.text);
+                      login(_idController.text, _passwordController.text);
                     }
                   },
                 )
@@ -146,16 +153,14 @@ class _LoginPageState extends State<LoginPage> {
           )
         )
       );
-
-    if (_id != "" && _password != "") {
-      if (appState.logOut) {
-        return loginForm;
-      } else {
-        return HomePage(id: _id, password: _password,);
+    
+    return Builder(builder: (context) {
+      if (mounted && _id != "" && _password != "") {
+        Future.microtask(() => login(_id, _password));
+        debug("logging in with $_id, $_password");
       }
-    } else {
       return loginForm;
-    }
+    });
   }
 }
 

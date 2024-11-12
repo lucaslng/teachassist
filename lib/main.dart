@@ -48,17 +48,5 @@ class MyApp extends StatelessWidget {
 }
 
 class MyAppState extends ChangeNotifier {
-
-  var logOut = false;
-
-  void logInF() {
-    logOut = false;
-    notifyListeners();
-  }
-  void logOutF() {
-    logOut = true;
-    notifyListeners();
-  }
-
   List<Course>? data;
 }

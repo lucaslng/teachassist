@@ -16,6 +16,8 @@ class Scraper {
   final CookieJar _cookieJar = CookieJar();
   
   Future<HttpClientResponse> _makeRequest(Uri uri) async {
+
+    debug("attempting to connect to $uri");
     
     var request = await _client.getUrl(uri);
     request.cookies.addAll(await _cookieJar.loadForRequest(uri));
@@ -24,7 +26,7 @@ class Scraper {
     _cookieJar.saveFromResponse(uri, response.cookies);
 
     // debug("\n");
-    // debug("connecting to $uri");
+    debug("succesfully connected to $uri");
     // debug(response.statusCode);
     // debug(response.headers);
     // debug("\n");
@@ -36,11 +38,12 @@ class Scraper {
         
         return Future.error("Invalid login");
       } else {
-        // debug("\nredirecting to $location \n");
+        debug("\nredirecting to $location \n");
         return _makeRequest(location);
       }
       
     } else {
+      debug("succesfully connected to $uri");
       return response;
     }
     
@@ -55,8 +58,10 @@ class Scraper {
 
     HttpClientResponse response = await _makeRequest(uri);
     if (response.statusCode == 200) {
-      final Future<String> responseBody = response.transform(utf8.decoder).join();
-      List<Course> courses = _parseHomeData(await responseBody);
+      final String responseBody = await response.transform(utf8.decoder).join();
+      // debug(responseBody);
+      List<Course> courses = _parseHomeData(responseBody);
+      debug("${courses.length} courses found");
       for (var course in courses) {
         if (course.url != Uri.parse("https://ta.yrdsb.ca/live/students/") && !course.url.toString().contains("viewReportOE")) {
           HttpClientResponse courseResponse = await _makeRequest(course.url);
@@ -88,7 +93,7 @@ class Scraper {
     for (var i = 0; i < assignmentsElement.length; i += 2) {
 		  List<Element> assignmentElement = assignmentsElement[i].children;
       final String name = assignmentElement[0].innerText.trim();
-      debug(name);
+      // debug(name);
       final String feedback = assignmentsElement[i+1].children[0].innerText.replaceAll("\n\n", "\n").trim();
 
       final Assignment assignment = Assignment(name: name, feedback: feedback);
@@ -100,7 +105,7 @@ class Scraper {
         final double mark = double.parse(element?.innerText.split("\n")[0].trim().split(RegExp(' (/|=) '))[0] ?? "-1");
         final int total = int.parse(element?.innerText.split("\n")[0].trim().split(RegExp(' (/|=) '))[1] ?? "-1");
         final int percent = int.parse(element?.innerText.split("\n")[0].trim().split(RegExp(' (/|=) '))[2].replaceFirst("%", "") ?? "-1");
-        debug(percent);
+        // debug(percent);
         final double weight = double.parse(element?.innerText.split("\n")[1].trim().replaceAll("weight=", "").replaceAll("no weight", "-1") ?? "-1");
         final Mark markClass = Mark(mark: mark, total: total, percent: percent, weight: weight);
         // debug(markClass.toString());

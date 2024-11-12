@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teachassist/main.dart';
+import 'package:teachassist/tools/debug.dart';
 
 class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
     final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -19,7 +19,7 @@ class SettingsPage extends StatelessWidget {
             label: const Text("Logout"),
             icon: const Icon(Icons.logout),
             onPressed:() {
-              appState.logOutF();
+              Navigator.popUntil(context, ModalRoute.withName("/"));
             },
           )
         ]
