@@ -20,6 +20,7 @@ class CoursePage extends StatelessWidget {
                 course.code,
                 style: theme.textTheme.headlineLarge,
               ),
+              const SizedBox(height: 10),
               CourseMarkRadialGauge(course: course),
               const SizedBox(height: 10),
               for (var assignment in course.assignments)
