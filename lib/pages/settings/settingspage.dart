@@ -14,10 +14,11 @@ class SettingsPage extends StatelessWidget {
               const SizedBox(height: 10),
               Text("Settings", style: theme.textTheme.headlineLarge),
               const SizedBox(height: 10),
-              const ListTile(
-                leading: Icon(Icons.palette),
-                title: Text("Appearance"),
-                trailing: Icon(Icons.arrow_forward_rounded),
+              ListTile(
+                leading: const Icon(Icons.palette),
+                title: const Text("Appearance"),
+                trailing: const Icon(Icons.arrow_forward_rounded),
+                onTap:() => Navigator.push(context, MaterialPageRoute(builder: (context) => Appearance())),
               ),
               const SizedBox(height: 20),
               ElevatedButton.icon(
@@ -34,4 +35,29 @@ class SettingsPage extends StatelessWidget {
     );
   }
   
+}
+
+class Appearance extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Appearance"),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: ListView(
+          children: const [
+            Column(
+              children: [
+                SizedBox(height: 10),
+                Text("not implemented yet"),
+              ]
+            )
+          ]
+        ),
+      )
+    );
+  }
 }
