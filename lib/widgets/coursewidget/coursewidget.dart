@@ -14,12 +14,7 @@ class CourseWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-        style: const ButtonStyle(shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(12))))),
-        onPressed:() {
-          Navigator.of(context).push((MaterialPageRoute(builder:(context) => CoursePage(course))));
-        },
-        child: Padding(
+    Widget content = Padding(
           padding: const EdgeInsets.all(12.0),
           child: Builder(builder: (context) {
             if (course.code.contains("LUNCH")) {
@@ -28,6 +23,27 @@ class CourseWidget extends StatelessWidget {
               return CourseInfoWidget(course: course);
             }
           }),
-        ));
+    );
+
+    if (course.hasMark) {
+      return Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: ElevatedButton(
+          style: const ButtonStyle(
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(12)))),
+            padding: WidgetStatePropertyAll(EdgeInsets.all(4)),
+          ),
+          onPressed:() {
+            Navigator.of(context).push((MaterialPageRoute(builder:(context) => CoursePage(course))));
+          },
+          child: content,
+        ),
+      );
+    } else {
+      return Card(
+        elevation: 3,
+        child: content,
+      );
+    }
   }
 }
