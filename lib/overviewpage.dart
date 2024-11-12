@@ -61,7 +61,7 @@ class OverviewPage extends StatelessWidget {
         for (var course in data)
           if (course.status() == "ongoing")
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               child: CourseWidget(course: course),
             ),
         const SizedBox(height: 10),
@@ -83,7 +83,7 @@ class OverviewPage extends StatelessWidget {
         for (var course in data)
           if (course.status() == "completed")
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               child: CourseWidget(course: course),
             ),
         const SizedBox(height: 10),
@@ -105,7 +105,7 @@ class OverviewPage extends StatelessWidget {
         for (var course in data)
           if (course.status() == "upcoming")
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               child: CourseWidget(course: course),
             ),
       ],

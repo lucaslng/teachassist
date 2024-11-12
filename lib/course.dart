@@ -53,16 +53,6 @@ class Course {
     }
   }
 
-  Widget page() {
-    return ListView(
-      children: [
-        Text(name),
-        for (var assignment in assignments)
-          Text(assignment.name)
-      ],
-    );
-  }
-
 }
 
 class Assignment {

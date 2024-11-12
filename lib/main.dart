@@ -7,7 +7,6 @@ import 'package:teachassist/course.dart';
 import 'package:teachassist/loginpage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 void main() async {
   runApp(MyApp());
 }
@@ -15,7 +14,9 @@ void main() async {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-  final ColorScheme colorScheme = ColorScheme.fromSeed(seedColor: const Color(0xff89b4fa), brightness: Brightness.dark).copyWith(
+  final ColorScheme colorScheme = ColorScheme.fromSeed(
+          seedColor: const Color(0xff89b4fa), brightness: Brightness.dark)
+      .copyWith(
     error: const Color(0xfff38ba8),
     primary: const Color(0xff89b4fa),
     // onPrimary: const Color(0xff1e1e2e),
@@ -28,7 +29,6 @@ class MyApp extends StatelessWidget {
     // onSurfaceVariant: const Color(0xff6c7086),
   );
 
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -39,7 +39,8 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           colorScheme: colorScheme,
           fontFamily: GoogleFonts.overpass().fontFamily,
-          elevatedButtonTheme: const ElevatedButtonThemeData(style: ButtonStyle(elevation: WidgetStatePropertyAll(3))),
+          elevatedButtonTheme: const ElevatedButtonThemeData(
+              style: ButtonStyle(elevation: WidgetStatePropertyAll(3))),
         ),
         home: const LoginPage(),
       ),

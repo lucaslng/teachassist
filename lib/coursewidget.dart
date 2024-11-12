@@ -12,8 +12,11 @@ class CourseWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        elevation: 3,
+    return ElevatedButton(
+        style: const ButtonStyle(shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(12))))),
+        onPressed:() {
+          Navigator.of(context).push((MaterialPageRoute(builder:(context) => CoursePage(course))));
+        },
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Builder(builder: (context) {
@@ -172,4 +175,27 @@ class SeeTeacherMessage extends StatelessWidget {
       ],
     );
   }
+}
+
+class CoursePage extends StatelessWidget {
+  final Course course;
+  const CoursePage(this.course);
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(),
+        body: ListView(
+          children: [
+            const SizedBox(height: 10),
+            Text(
+              course.code,
+              style: theme.textTheme.headlineLarge)
+          ]
+        )
+      )
+    );
+  }
+
 }
