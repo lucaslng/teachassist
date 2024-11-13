@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:teachassist/main.dart';
 import 'package:teachassist/utils/coursedata/course.dart';
 import 'package:teachassist/utils/round.dart';
+import 'package:teachassist/widgets/circlewidget.dart';
 import 'package:teachassist/widgets/coursewidget/coursewidget.dart';
-import 'package:teachassist/widgets/radialwidget.dart';
 
 class OverviewPage extends StatelessWidget {
   double _calculateCourseAverage(List<Course> data) {
@@ -45,11 +45,11 @@ class OverviewPage extends StatelessWidget {
           builder: (context) {
             if (courseAverage != -1) {
               return Container(
-                height: 300,
-                width: 300,
-                child: RadialGauge(
-                  value: courseAverage,
-                  isAverage: true,
+                height: 215,
+                width: 215,
+                child: Radial(
+                  percent: courseAverage,
+                  isBig: true,
                 )
               );
             } else {
@@ -57,6 +57,7 @@ class OverviewPage extends StatelessWidget {
             }
           }
         ),
+        const SizedBox(height: 10),
         for (var course in data)
           if (course.status() == "ongoing")
             Padding(

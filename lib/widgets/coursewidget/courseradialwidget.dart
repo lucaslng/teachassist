@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teachassist/utils/coursedata/course.dart';
-import 'package:teachassist/widgets/radialwidget.dart';
+import 'package:teachassist/widgets/circlewidget.dart';
 
 class CourseMarkRadialGauge extends StatelessWidget {
   const CourseMarkRadialGauge({
@@ -16,6 +16,6 @@ class CourseMarkRadialGauge extends StatelessWidget {
         alignment: Alignment.centerRight,
         height: 170,
         width: 170,
-        child: RadialGauge(value: course.getMark()));
+        child: Radial(percent: course.getMark()));
   }
 }
