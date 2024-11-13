@@ -8,10 +8,11 @@ import 'package:teachassist/pages/loginpage.dart';
 import 'package:teachassist/utils/coursedata/course.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:teachassist/utils/debug.dart';
+import 'package:teachassist/utils/scraper.dart';
 
 
 void main() async {
-  if (Platform.isAndroid) {await FlutterDisplayMode.setHighRefreshRate();}
+  // if (Platform.isAndroid) {await FlutterDisplayMode.setHighRefreshRate();}
   // debug(await FlutterDisplayMode.active);s
   runApp(MyApp());
 }
@@ -55,4 +56,11 @@ class MyApp extends StatelessWidget {
 
 class MyAppState extends ChangeNotifier {
   List<Course>? data;
+  String id = "";
+  String password = "";
+  Future<void> refreshData() async {
+    Scraper scraper = Scraper(id, password);
+    data = await scraper.fetchData();
+    notifyListeners();
+  }
 }

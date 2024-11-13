@@ -44,6 +44,7 @@ dependencies:
   gauge_indicator: ^0.4.3
   fl_chart: ^0.69.0
   flutter_displaymode: ^0.6.0
+  custom_refresh_indicator: ^4.0.1
 
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teachassist/widgets/custom_circular_progress_indicator.dart';
 
 class LoadingPage extends StatelessWidget {
   const LoadingPage({
@@ -10,10 +11,7 @@ class LoadingPage extends StatelessWidget {
     return const Center(
       widthFactor: 100,
       heightFactor: 100,
-      child: CircularProgressIndicator(
-        strokeWidth: 10,
-        strokeCap: StrokeCap.round,
-      ),
+      child: CustomCircularProgressIndicator(),
     );
   }
 }

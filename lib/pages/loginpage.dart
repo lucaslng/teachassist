@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:provider/provider.dart';
+import 'package:teachassist/main.dart';
 import 'package:teachassist/pages/homepage.dart';
 import 'package:teachassist/utils/debug.dart';
 
@@ -61,7 +63,10 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final appState = context.watch<MyAppState>();
     final theme = Theme.of(context);
+    appState.id = _id;
+    appState.password = _password;
 
     Widget loginForm = Scaffold(
         body: Form(
@@ -141,6 +146,8 @@ class _LoginPageState extends State<LoginPage> {
                       debug("username: ${_idController.text}");
                       debug("password: ${_passwordController.text}");
                       _setCredentials(_idController.text, _passwordController.text);
+                      appState.id = _idController.text;
+                      appState.password = _passwordController.text;
                       login(_idController.text, _passwordController.text);
                     }
                   },
