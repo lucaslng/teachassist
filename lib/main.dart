@@ -14,11 +14,11 @@ import 'package:teachassist/utils/scraper.dart';
 void main() async {
   // if (Platform.isAndroid) {await FlutterDisplayMode.setHighRefreshRate();}
   // debug(await FlutterDisplayMode.active);s
-  runApp(MyApp());
+  runApp(App());
 }
 
-class MyApp extends StatelessWidget {
-  MyApp({super.key});
+class App extends StatelessWidget {
+  App({super.key});
 
   final ColorScheme colorScheme = ColorScheme.fromSeed(
           seedColor: const Color(0xff89b4fa), brightness: Brightness.dark)
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => MyAppState(),
+      create: (context) => AppState(),
       child: MaterialApp(
         title: 'Teachassist',
         theme: ThemeData(
@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyAppState extends ChangeNotifier {
+class AppState extends ChangeNotifier {
   List<Course>? data;
   String id = "";
   String password = "";

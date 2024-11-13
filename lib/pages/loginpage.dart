@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final appState = context.watch<MyAppState>();
+    final appState = context.watch<AppState>();
 
     Widget loginForm = Scaffold(
         body: Form(
@@ -144,8 +144,8 @@ class _LoginPageState extends State<LoginPage> {
                       debug("username: ${_idController.text}");
                       debug("password: ${_passwordController.text}");
                       _setCredentials(_idController.text, _passwordController.text);
-                      appState.id = _idController.text;
-                      appState.password = _passwordController.text;
+                      appState.setID(_idController.text);
+                      appState.setPassword(_passwordController.text);
                       login(_idController.text, _passwordController.text);
                     }
                   },

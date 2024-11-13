@@ -27,7 +27,7 @@ class Scraper {
     _cookieJar.saveFromResponse(uri, response.cookies);
 
     // debug("\n");
-    debug("succesfully connected to $uri");
+    // debug("succesfully connected to $uri");
     // debug(response.statusCode);
     // debug(response.headers);
     // debug("\n");
@@ -39,12 +39,12 @@ class Scraper {
         
         return Future.error("Invalid login");
       } else {
-        debug("\nredirecting to $location \n");
+        // debug("\nredirecting to $location \n");
         return _makeRequest(location);
       }
       
     } else {
-      debug("succesfully connected to $uri");
+      // debug("succesfully connected to $uri");
       return response;
     }
     
@@ -62,14 +62,14 @@ class Scraper {
       final String responseBody = await response.transform(utf8.decoder).join();
       // debug(responseBody);
       List<Course> courses = _parseHomeData(responseBody);
-      debug("${courses.length} courses found");
+      // debug("${courses.length} courses found");
       for (var course in courses) {
         try {
           if (course.url != Uri.parse("https://ta.yrdsb.ca/live/students/") && !course.url.toString().contains("viewReportOE")) {
             HttpClientResponse courseResponse = await _makeRequest(course.url);
             debug("requesting ${course.name} ${course.url}");
               if (courseResponse.statusCode == 200) {
-                debug("requesting ${course.name} ${course.url} success");
+                // debug("requesting ${course.name} ${course.url} success");
                 final Future<String> courseResponseBody = courseResponse.transform(utf8.decoder).join();
                 final List<Assignment> assignments = _parseCourseData(await courseResponseBody);
                 course.assignments = assignments;

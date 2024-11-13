@@ -31,7 +31,7 @@ class OverviewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
+    var appState = context.watch<AppState>();
     var theme = Theme.of(context);
 
     List<Course> data = [];
