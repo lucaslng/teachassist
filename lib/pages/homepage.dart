@@ -52,7 +52,6 @@ class _HomePageState extends State<HomePage> {
         builder: (context, snapshot) {
           Widget children;
           if (snapshot.hasData) {
-            
             appState.data = snapshot.data;
             children = Scaffold(
               body: page,
