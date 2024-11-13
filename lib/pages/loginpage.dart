@@ -144,7 +144,9 @@ class _LoginPageState extends State<LoginPage> {
                       debug("username: ${_idController.text}");
                       debug("password: ${_passwordController.text}");
                       _setCredentials(_idController.text, _passwordController.text);
+                      debug(appState.id);
                       appState.setID(_idController.text);
+                      debug(appState.id);
                       appState.setPassword(_passwordController.text);
                       login(_idController.text, _passwordController.text);
                     }
@@ -159,6 +161,7 @@ class _LoginPageState extends State<LoginPage> {
     return Builder(builder: (context) {
       if (mounted && _id != "" && _password != "") {
         appState.id = _id;
+        debug(appState.id);
         appState.password = _password;
         Future.microtask(() => login(_id, _password));
         debug("logging in with $_id, $_password");

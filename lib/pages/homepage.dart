@@ -6,6 +6,7 @@ import 'package:teachassist/pages/loadingpage.dart';
 import 'package:teachassist/pages/overviewpage.dart';
 import 'package:teachassist/pages/settings/settingspage.dart';
 import 'package:teachassist/utils/coursedata/course.dart';
+import 'package:teachassist/utils/debug.dart';
 import 'package:teachassist/utils/scraper.dart';
 
 class HomePage extends StatefulWidget {
@@ -51,8 +52,10 @@ class _HomePageState extends State<HomePage> {
         future: data,
         builder: (context, snapshot) {
           Widget children;
+          debug("data changed: $data");
           if (snapshot.hasData) {
             appState.data = snapshot.data;
+            debug(snapshot.data!.length.toString());
             children = Scaffold(
               body: page,
               bottomNavigationBar: NavigationBar(
@@ -79,6 +82,7 @@ class _HomePageState extends State<HomePage> {
           } else if (snapshot.hasError) {
             children = ErrorPage(snapshot: snapshot);
           } else {
+            debug("loading page");
             children = const LoadingPage();
           }
           return Scaffold(
