@@ -93,7 +93,7 @@ class Scraper {
     final HtmlDocument doc = parseHtmlDocument(data);
 
     final List<Element> assignmentsElement;
-    if (doc.querySelector('body > div > div:nth-child(3) > h3')!.innerText.contains("Learning Skills")) {
+    if (doc.querySelector('body > div > div:nth-child(3) > h3') != null) {
       assignmentsElement = doc.querySelector('body > div > div:nth-child(5) > div > div > table:nth-child(1) > tbody')!.children.toList();
     } else {
       assignmentsElement = doc.querySelector('body > div > div:nth-child(3) > div > div > table:nth-child(1) > tbody')!.children.toList(); // 
