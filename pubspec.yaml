@@ -42,6 +42,8 @@ dependencies:
   provider: ^6.1.2
   circle_chart: ^1.0.0
   gauge_indicator: ^0.4.3
+  fl_chart: ^0.69.0
+  flutter_displaymode: ^0.6.0
 
 dev_dependencies:
   flutter_test:

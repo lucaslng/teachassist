@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 // import 'package:syncfusion_flutter_charts/charts.dart';
 // import 'package:syncfusion_flutter_charts/sparkcharts.dart';
-// import 'dart:io';
+import 'dart:io' show Platform;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:teachassist/pages/loginpage.dart';
 import 'package:teachassist/utils/coursedata/course.dart';
+import 'package:flutter_displaymode/flutter_displaymode.dart';
+import 'package:teachassist/utils/debug.dart';
+
 
 void main() async {
+  if (Platform.isAndroid) {await FlutterDisplayMode.setHighRefreshRate();}
+  // debug(await FlutterDisplayMode.active);s
   runApp(MyApp());
 }
 
