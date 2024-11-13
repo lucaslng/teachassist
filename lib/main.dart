@@ -58,6 +58,14 @@ class MyAppState extends ChangeNotifier {
   List<Course>? data;
   String id = "";
   String password = "";
+  void setID(String newid) {
+    id = newid;
+    notifyListeners();
+  }
+  void setPassword(String newpassword) {
+    password = newpassword;
+    notifyListeners();
+  }
   Future<void> refreshData() async {
     Scraper scraper = Scraper(id, password);
     data = await scraper.fetchData();
