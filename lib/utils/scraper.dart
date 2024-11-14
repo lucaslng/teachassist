@@ -18,7 +18,7 @@ class Scraper {
   
   Future<HttpClientResponse> _makeRequest(Uri uri) async {
 
-    debug("attempting to connect to $uri");
+    // debug("attempting to connect to $uri");
     
     var request = await _client.getUrl(uri);
     request.cookies.addAll(await _cookieJar.loadForRequest(uri));
@@ -59,6 +59,7 @@ class Scraper {
 
     HttpClientResponse response = await _makeRequest(uri);
     if (response.statusCode == 200) {
+      debug("connected");
       final String responseBody = await response.transform(utf8.decoder).join();
       // debug(responseBody);
       List<Course> courses = _parseHomeData(responseBody);
@@ -67,7 +68,7 @@ class Scraper {
         try {
           if (course.url != Uri.parse("https://ta.yrdsb.ca/live/students/") && !course.url.toString().contains("viewReportOE")) {
             HttpClientResponse courseResponse = await _makeRequest(course.url);
-            debug("requesting ${course.name} ${course.url}");
+            // debug("requesting ${course.name} ${course.url}");
               if (courseResponse.statusCode == 200) {
                 // debug("requesting ${course.name} ${course.url} success");
                 final Future<String> courseResponseBody = courseResponse.transform(utf8.decoder).join();

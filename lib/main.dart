@@ -67,6 +67,7 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
   Future<void> refreshData() async {
+    debug("refrishing");
     Scraper scraper = Scraper(id, password);
     data = await scraper.fetchData();
     notifyListeners();

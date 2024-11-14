@@ -9,6 +9,9 @@ import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:teachassist/widgets/custom_circular_progress_indicator.dart';
 
 class OverviewPage extends StatelessWidget {
+  final List<Course> data;
+  const OverviewPage(this.data);
+
 
   double _calculateCourseAverage(List<Course> data) {
     int courseCount = 0;
@@ -33,11 +36,6 @@ class OverviewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var appState = context.watch<AppState>();
     var theme = Theme.of(context);
-
-    List<Course> data = [];
-    if (appState.data != null) {
-      data = appState.data!;
-    }
 
     double courseAverage = _calculateCourseAverage(data);
 

@@ -35,16 +35,15 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     var appState = context.watch<AppState>();
 
-    Widget page;
+    Widget page(List<Course> data) {
     switch (_selectedIndex) {
       case 0:
-        page = OverviewPage();
-        break;
+        return OverviewPage(data);
       case 1:
-        page = SettingsPage();
-        break;
+        return SettingsPage();
       default:
         throw UnimplementedError("No widget for selected index: $_selectedIndex");
+    }
     }
     
     return SafeArea(
@@ -57,7 +56,7 @@ class _HomePageState extends State<HomePage> {
             appState.data = snapshot.data;
             debug(snapshot.data!.length.toString());
             children = Scaffold(
-              body: page,
+              body: page(snapshot.data!),
               bottomNavigationBar: NavigationBar(
                 elevation: 3,
                 // backgroundColor: ,
