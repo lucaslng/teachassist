@@ -1,10 +1,16 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:teachassist/pages/settings/appearance.dart';
+import 'package:teachassist/route/router.gr.dart';
+import 'package:teachassist/utils/authprovider.dart';
+import 'package:provider/provider.dart';
 
 class SettingsPage extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: ListView(
@@ -26,7 +32,9 @@ class SettingsPage extends StatelessWidget {
                 label: const Text("Logout"),
                 icon: const Icon(Icons.logout),
                 onPressed:() {
-                  Navigator.popUntil(context, ModalRoute.withName("/"));
+                  var authProvider = Provider.of<AuthProvider>(context, listen: false);
+                  authProvider.logout();
+                  context.router.popUntilRoot();
                 },
               )
             ],

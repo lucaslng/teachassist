@@ -51,6 +51,8 @@ class Scraper {
   }
 
   Future<List<Course>> fetchData() async {
+    debug("scraper id: $id");
+    debug("scraper password: $password");
     final uri = Uri.https(
       'ta.yrdsb.ca',
       'live/index.php',
