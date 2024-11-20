@@ -1,5 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:teachassist/pages/coursepage.dart';
+import 'package:teachassist/route/router.gr.dart';
 import 'package:teachassist/utils/coursedata/course.dart';
 import 'package:teachassist/widgets/coursewidget/courseinfowidget.dart';
 import 'package:teachassist/widgets/coursewidget/lunchwidget.dart';
@@ -34,7 +35,8 @@ class CourseWidget extends StatelessWidget {
             padding: WidgetStatePropertyAll(EdgeInsets.all(4)),
           ),
           onPressed:() {
-            Navigator.of(context).push((MaterialPageRoute(builder:(context) => CoursePage(course))));
+            context.router.push(CourseRoute(course: course));
+            // Navigator.of(context).push((MaterialPageRoute(builder:(context) => CoursePage(course))));
           },
           child: content,
         ),

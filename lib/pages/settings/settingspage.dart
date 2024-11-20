@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:teachassist/pages/settings/appearance.dart';
-import 'package:teachassist/route/router.gr.dart';
 import 'package:teachassist/utils/authprovider.dart';
 import 'package:provider/provider.dart';
 

@@ -19,8 +19,8 @@ class Radial extends StatelessWidget {
           style: isBig ? theme.textTheme.displayLarge : theme.textTheme.displayMedium),
         AnimatedRadialGauge(
           // alignment: Alignment.center,
-          duration: const Duration(milliseconds: 800),
-          curve: Curves.easeOutCubic,
+          duration: Durations.long4,
+          curve: Curves.easeInOutCubicEmphasized,
           radius: 270,
           value: percent,
           axis: GaugeAxis(

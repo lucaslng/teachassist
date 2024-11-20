@@ -1,8 +1,5 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
-import 'package:teachassist/route/router.gr.dart';
 import 'package:teachassist/utils/coursedata/course.dart';
 import 'package:teachassist/utils/debug.dart';
 import 'package:teachassist/utils/round.dart';

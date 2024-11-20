@@ -22,6 +22,7 @@ class _SplashPageState extends State<SplashPage> {
       final id = await _storage.read(key: "id");
       final password = await _storage.read(key: "password");
       if (id == null || password == null) {
+        // ignore: use_build_context_synchronously
         final newcreds = await context.router.push<({String id, String password})>(LoginRoute(storage: _storage, setSplashState: (() {setState(() {},);debug("setstate");})));
         return newcreds!;
       } else {
