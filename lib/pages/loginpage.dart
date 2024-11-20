@@ -1,12 +1,14 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
-import 'package:teachassist/main.dart';
-import 'package:teachassist/pages/homepage.dart';
+import 'package:teachassist/utils/authprovider.dart';
 import 'package:teachassist/utils/debug.dart';
 
+@RoutePage()
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  final FlutterSecureStorage storage;
+  const LoginPage(this.storage);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -17,42 +19,18 @@ class _LoginPageState extends State<LoginPage> {
   final _idController = TextEditingController();
   final _passwordController = TextEditingController();
   var _passwordView = true;
-  final _storage = const FlutterSecureStorage();
-  var _id = "";
-  var _password = "";
-
-  Future<void> login(String id, String password) async {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          return HomePage(id: id, password: password);
-        }
-      )
-    );
-  }
-
-  Future<void> _loadCredentials() async {
-    final id = await _storage.read(key: "id");
-    final password = await _storage.read(key: "password");
-    setState(() {
-      _id = id ?? "";
-      _password = password ?? "";
-    });
-  }
 
   Future<void> _setCredentials(String id, String password) async {
     setState(() {
-      _storage.write(key: "id", value: id);
-      _storage.write(key: "password", value: password);
+      widget.storage.write(key: "id", value: id);
+      widget.storage.write(key: "password", value: password);
     });
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _loadCredentials();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  // }
 
   @override
   void dispose() {
@@ -64,12 +42,11 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final appState = context.watch<AppState>();
 
     Widget loginForm = Scaffold(
         body: Form(
           key: _formKey,
-          autovalidateMode: AutovalidateMode.always,
+          // autovalidateMode: AutovalidateMode.always,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
@@ -144,11 +121,12 @@ class _LoginPageState extends State<LoginPage> {
                       debug("username: ${_idController.text}");
                       debug("password: ${_passwordController.text}");
                       _setCredentials(_idController.text, _passwordController.text);
-                      debug(appState.id);
-                      appState.setID(_idController.text);
-                      debug(appState.id);
-                      appState.setPassword(_passwordController.text);
-                      login(_idController.text, _passwordController.text);
+                      var router = AutoRouter.of(context);
+                      var credentials = (id: _idController.text, password: _passwordController.text);
+                      var authProvider = Provider.of<AuthProvider>(context, listen: false);
+                      router.maybePop(credentials);
+                      authProvider.login();
+                      // router.push(ScraperSplash(id: _idController.text, password: _passwordsController.text));
                     }
                   },
                 )
@@ -158,16 +136,7 @@ class _LoginPageState extends State<LoginPage> {
         )
       );
     
-    return Builder(builder: (context) {
-      if (mounted && _id != "" && _password != "") {
-        appState.id = _id;
-        debug(appState.id);
-        appState.password = _password;
-        Future.microtask(() => login(_id, _password));
-        debug("logging in with $_id, $_password");
-      }
-      return loginForm;
-    });
+    return loginForm;
   }
 }
 

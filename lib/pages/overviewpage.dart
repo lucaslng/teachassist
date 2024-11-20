@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:teachassist/main.dart';
 import 'package:teachassist/utils/coursedata/course.dart';
+import 'package:teachassist/utils/debug.dart';
 import 'package:teachassist/utils/round.dart';
 import 'package:teachassist/widgets/circlewidget.dart';
 import 'package:teachassist/widgets/coursewidget/coursewidget.dart';
@@ -32,15 +31,18 @@ class OverviewPage extends StatelessWidget {
     
   }
 
+  Future<void> refreshmsg() async {
+    debug("refresh");
+  }
+
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<AppState>();
     var theme = Theme.of(context);
 
     double courseAverage = _calculateCourseAverage(data);
 
     return CustomMaterialIndicator(
-      onRefresh: appState.refreshData,
+      onRefresh: refreshmsg,
       indicatorBuilder: (context, controller) {
         return const Padding(
           padding: EdgeInsets.all(4.0),

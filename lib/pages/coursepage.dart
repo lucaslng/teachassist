@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:teachassist/utils/coursedata/course.dart';
 import 'package:teachassist/widgets/coursewidget/courseradialwidget.dart';
 
+@RoutePage()
 class CoursePage extends StatelessWidget {
   final Course course;
   const CoursePage(this.course);

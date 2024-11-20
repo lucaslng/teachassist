@@ -1,5 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:teachassist/utils/authprovider.dart';
 
+@RoutePage()
 class ErrorPage extends StatelessWidget {
   const ErrorPage({
     super.key,
@@ -29,7 +33,8 @@ class ErrorPage extends StatelessWidget {
             icon: const Icon(Icons.logout),
             label: const Text("Logout"),
             onPressed: () {
-              Navigator.pop(context);
+              var authProvider = Provider.of<AuthProvider>(context, listen: false);
+              authProvider.logout();
             }
           )
         ],
