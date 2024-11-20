@@ -41,7 +41,7 @@ class _ScraperSplashState extends State<ScraperSplash> {
         if (snapshot.hasData) {
           router.push(HomeRoute(data: snapshot.data!));
         } else if (snapshot.hasError) {
-          return ErrorPage(snapshot: snapshot);
+          router.push(ErrorRoute(snapshot: snapshot));
         }
         return const LoadingPage();
       }

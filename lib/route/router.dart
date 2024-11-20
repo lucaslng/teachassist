@@ -10,10 +10,10 @@ class AppRouter extends RootStackRouter {
  @override
  List<AutoRoute> get routes => [
     AutoRoute(page: SplashRoute.page, initial: true, maintainState: true),
-    AutoRoute(page: LoginRoute.page, maintainState: false),
-    AutoRoute(page: ScraperSplash.page, maintainState: false),
-    AutoRoute(page: HomeRoute.page, maintainState: false),
-    AutoRoute(page: CourseRoute.page),
-    AutoRoute(page: ErrorRoute.page)
+    AutoRoute(page: LoginRoute.page, maintainState: false, keepHistory: false),
+    AutoRoute(page: ScraperSplash.page, maintainState: false, keepHistory: false),
+    AutoRoute(page: HomeRoute.page, maintainState: false, keepHistory: false),
+    AutoRoute(page: CourseRoute.page, maintainState: false),
+    AutoRoute(page: ErrorRoute.page, maintainState: false)
  ];
 }

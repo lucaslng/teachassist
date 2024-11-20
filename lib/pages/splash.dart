@@ -22,7 +22,7 @@ class _SplashPageState extends State<SplashPage> {
       final id = await _storage.read(key: "id");
       final password = await _storage.read(key: "password");
       if (id == null || password == null) {
-        final newcreds = await context.router.push<({String id, String password})>(LoginRoute(storage: _storage));
+        final newcreds = await context.router.push<({String id, String password})>(LoginRoute(storage: _storage, setSplashState: (() {setState(() {},);debug("setstate");})));
         return newcreds!;
       } else {
         return (id: id, password: password);
@@ -43,8 +43,11 @@ class _SplashPageState extends State<SplashPage> {
     return FutureBuilder(
       future: credentials,
       builder: (context, snapshot) {
-        if (snapshot.hasData) {
+        if (snapshot.hasData && snapshot.connectionState == ConnectionState.done) {
           if (!authProvider.isLoggedOut) {
+            debug("snapshot id: ${snapshot.data!.id}");
+            debug("snapshot password: ${snapshot.data!.password}");
+            // debug(snapshot.connectionState.toString());
             router.push(ScraperSplash(id: snapshot.data!.id, password: snapshot.data!.password));
           } else {
             debug("logout");

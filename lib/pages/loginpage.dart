@@ -8,7 +8,8 @@ import 'package:teachassist/utils/debug.dart';
 @RoutePage()
 class LoginPage extends StatefulWidget {
   final FlutterSecureStorage storage;
-  const LoginPage(this.storage);
+  final void Function() setSplashState;
+  const LoginPage(this.storage, this.setSplashState);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -118,14 +119,16 @@ class _LoginPageState extends State<LoginPage> {
                   icon: const Icon(Icons.login),
                   onPressed:() {
                     if (_formKey.currentState!.validate()) {
-                      debug("username: ${_idController.text}");
-                      debug("password: ${_passwordController.text}");
+                      debug("login username: ${_idController.text}");
+                      debug("login password: ${_passwordController.text}");
                       _setCredentials(_idController.text, _passwordController.text);
                       var router = AutoRouter.of(context);
                       var credentials = (id: _idController.text, password: _passwordController.text);
                       var authProvider = Provider.of<AuthProvider>(context, listen: false);
-                      router.maybePop(credentials);
                       authProvider.login();
+                      widget.setSplashState();
+                      router.maybePop(credentials);
+                      
                       // router.push(ScraperSplash(id: _idController.text, password: _passwordsController.text));
                     }
                   },

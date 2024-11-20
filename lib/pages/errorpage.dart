@@ -35,6 +35,7 @@ class ErrorPage extends StatelessWidget {
             onPressed: () {
               var authProvider = Provider.of<AuthProvider>(context, listen: false);
               authProvider.logout();
+              context.router.popUntilRoot();
             }
           )
         ],

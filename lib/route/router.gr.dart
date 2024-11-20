@@ -150,10 +150,14 @@ class HomeRouteArgs {
 class LoginRoute extends _i7.PageRouteInfo<LoginRouteArgs> {
   LoginRoute({
     required _i10.FlutterSecureStorage storage,
+    required void Function() setSplashState,
     List<_i7.PageRouteInfo>? children,
   }) : super(
           LoginRoute.name,
-          args: LoginRouteArgs(storage: storage),
+          args: LoginRouteArgs(
+            storage: storage,
+            setSplashState: setSplashState,
+          ),
           initialChildren: children,
         );
 
@@ -163,19 +167,27 @@ class LoginRoute extends _i7.PageRouteInfo<LoginRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<LoginRouteArgs>();
-      return _i4.LoginPage(args.storage);
+      return _i4.LoginPage(
+        args.storage,
+        args.setSplashState,
+      );
     },
   );
 }
 
 class LoginRouteArgs {
-  const LoginRouteArgs({required this.storage});
+  const LoginRouteArgs({
+    required this.storage,
+    required this.setSplashState,
+  });
 
   final _i10.FlutterSecureStorage storage;
 
+  final void Function() setSplashState;
+
   @override
   String toString() {
-    return 'LoginRouteArgs{storage: $storage}';
+    return 'LoginRouteArgs{storage: $storage, setSplashState: $setSplashState}';
   }
 }
 
