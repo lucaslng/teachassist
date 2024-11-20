@@ -39,6 +39,7 @@ class _HomePageState extends State<HomePage> {
       body: page(widget.data),
       bottomNavigationBar: NavigationBar(
         elevation: 3,
+        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         // backgroundColor: ,
         destinations: const [
           NavigationDestination(
