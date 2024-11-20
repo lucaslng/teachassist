@@ -6,7 +6,7 @@ This is an unofficial app for Teachassist written with Flutter.
 
 - [x] Login page
 - [x] Get home page data
-- [ ] Home page UI
+- [x] Home page UI
 - [ ] Page for each course
 - [ ] Mark calculation
 - [ ] UI Animations
