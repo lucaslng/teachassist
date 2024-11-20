@@ -1,4 +1,4 @@
-package com.example.teachassist
+package app.lucaslng.teachassist
 
 import io.flutter.embedding.android.FlutterActivity
 
