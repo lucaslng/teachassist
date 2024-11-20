@@ -1,4 +1,8 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:teachassist/route/router.gr.dart';
 import 'package:teachassist/utils/coursedata/course.dart';
 import 'package:teachassist/utils/debug.dart';
 import 'package:teachassist/utils/round.dart';
@@ -31,10 +35,6 @@ class OverviewPage extends StatelessWidget {
     
   }
 
-  Future<void> refreshmsg() async {
-    debug("refresh");
-  }
-
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -42,7 +42,9 @@ class OverviewPage extends StatelessWidget {
     double courseAverage = _calculateCourseAverage(data);
 
     return CustomMaterialIndicator(
-      onRefresh: refreshmsg,
+      onRefresh: () async {
+        Phoenix.rebirth(context);
+      },
       indicatorBuilder: (context, controller) {
         return const Padding(
           padding: EdgeInsets.all(4.0),
