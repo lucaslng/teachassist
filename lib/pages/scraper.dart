@@ -1,7 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:teachassist/pages/errorpage.dart';
 import 'package:teachassist/pages/loadingpage.dart';
 import 'package:teachassist/route/router.gr.dart';
 import 'package:teachassist/utils/coursedata/course.dart';
