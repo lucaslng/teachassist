@@ -2,4 +2,4 @@
 
 This is an unofficial app for Teachassist written with Flutter.
 
-![alt text](https://github.com/lucaslng/teachassist/blob/main/image.jpg?raw=true)
+![Home Page](https://github.com/lucaslng/teachassist/blob/main/teachassist.jpg?raw=true)
